@@ -1,0 +1,408 @@
+<?php get_header(); ?>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg-grid"></div>
+  <div class="hero-bg-orb-1"></div>
+  <div class="hero-bg-orb-2"></div>
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="dot"></span>
+          <span><?php echo nexaflow_hero('hero_badge', 'Trusted by 500+ Global Enterprises'); ?></span>
+        </div>
+        <h1 class="hero-title">
+          <?php echo nexaflow_hero('hero_title_1', 'Intelligent BPO'); ?><br>
+          <?php echo nexaflow_hero('hero_title_2', 'Solutions for'); ?><br>
+          <span class="highlight"><?php echo nexaflow_hero('hero_title_highlight', 'Modern Business'); ?></span>
+        </h1>
+        <p class="hero-desc"><?php echo nexaflow_hero('hero_desc', 'We help enterprises streamline operations, reduce costs, and accelerate growth with AI-powered business process outsourcing and digital transformation.'); ?></p>
+        <div class="hero-actions">
+          <a href="<?php echo esc_url(get_theme_mod('hero_cta_1_url', '#contact')); ?>" class="btn btn-primary">
+            <?php echo nexaflow_hero('hero_cta_1_text', 'Get Started'); ?> →
+          </a>
+          <a href="<?php echo esc_url(get_theme_mod('hero_cta_2_url', '#services')); ?>" class="btn btn-outline">
+            <?php echo nexaflow_hero('hero_cta_2_text', 'Explore Services'); ?>
+          </a>
+        </div>
+        <div class="hero-stats">
+          <?php
+          $stats = [
+            ['stat_clients_num',   '500+', 'stat_clients_lbl',   'Clients Worldwide'],
+            ['stat_retention_num', '98%',  'stat_retention_lbl', 'Retention Rate'],
+            ['stat_cost_num',      '40%',  'stat_cost_lbl',      'Cost Reduction'],
+          ];
+          foreach ($stats as [$nk, $nd, $lk, $ld]) : ?>
+          <div class="stat-item">
+            <div class="num"><?php echo nexaflow_hero($nk, $nd); ?></div>
+            <div class="lbl"><?php echo nexaflow_hero($lk, $ld); ?></div>
+          </div>
+          <?php endforeach; ?>
+        </div>
+      </div>
+
+      <!-- Dashboard Visual (static — decorative) -->
+      <div class="hero-visual">
+        <div class="dashboard-card">
+          <div class="dashboard-header">
+            <span class="dashboard-title"><?php echo nexaflow_hero('hero_dashboard_title', 'Operations Dashboard'); ?></span>
+            <span class="live-badge">Live</span>
+          </div>
+          <div class="metrics-grid">
+            <div class="metric-box">
+              <div class="m-val">94.7<span style="font-size:1rem;color:rgba(255,255,255,0.4)">%</span></div>
+              <div class="m-label">CSAT Score</div>
+              <div class="m-trend">↑ 3.2% this month</div>
+            </div>
+            <div class="metric-box">
+              <div class="m-val">12.3<span style="font-size:1rem;color:rgba(255,255,255,0.4)">s</span></div>
+              <div class="m-label">Avg Handle Time</div>
+              <div class="m-trend">↓ 18% vs target</div>
+            </div>
+            <div class="metric-box">
+              <div class="m-val">8.4<span style="font-size:1rem;color:rgba(255,255,255,0.4)">K</span></div>
+              <div class="m-label">Tickets Resolved</div>
+              <div class="m-trend">↑ 12% vs last week</div>
+            </div>
+            <div class="metric-box">
+              <div class="m-val">$2.1<span style="font-size:1rem;color:rgba(255,255,255,0.4)">M</span></div>
+              <div class="m-label">Cost Saved YTD</div>
+              <div class="m-trend">↑ 41% vs forecast</div>
+            </div>
+          </div>
+          <div class="chart-bar-wrap">
+            <div style="display:flex;justify-content:space-between;margin-bottom:12px;">
+              <span style="color:rgba(255,255,255,0.5);font-size:0.8125rem;font-weight:600;">Weekly Performance</span>
+              <span style="color:var(--color-accent);font-size:0.8125rem;font-weight:600;">+23% ↑</span>
+            </div>
+            <div class="chart-bars">
+              <?php
+              foreach ([55,70,45,80,65,90,75,85,70,95,80,100] as $i => $h) {
+                $active = ($i === 11) ? ' active' : '';
+                echo "<div class='bar{$active}' style='height:{$h}%;animation-delay:".($i*0.05)."s'></div>";
+              }
+              ?>
+            </div>
+            <div style="display:flex;justify-content:space-between;margin-top:8px;">
+              <?php foreach (['Mon','Tue','Wed','Thu','Fri','Sat','Sun','Mon','Tue','Wed','Thu','Fri'] as $d) : ?>
+              <span style="color:rgba(255,255,255,0.25);font-size:0.625rem;"><?php echo $d; ?></span>
+              <?php endforeach; ?>
+            </div>
+          </div>
+          <div class="floating-card floating-card-1">
+            <div class="fc-icon green">✓</div>
+            <div class="fc-text">
+              <div class="fc-title">SLA Achieved</div>
+              <div class="fc-sub">99.4% uptime this quarter</div>
+            </div>
+          </div>
+          <div class="floating-card floating-card-2">
+            <div class="fc-icon orange">🤖</div>
+            <div class="fc-text">
+              <div class="fc-title">AI Automating</div>
+              <div class="fc-sub">34% of routine tasks</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- CLIENTS -->
+<section id="clients">
+  <div class="container">
+    <p class="clients-label"><?php echo esc_html(get_theme_mod('clients_label', 'Trusted by leading companies worldwide')); ?></p>
+    <div class="logos-track">
+      <?php
+      $raw     = get_theme_mod('clients_list', 'Accenture,Deloitte,JPMorgan,Unilever,Microsoft,Samsung,Pfizer,Walmart');
+      $clients = array_filter(array_map('trim', explode(',', $raw)));
+      // Double for seamless scroll loop
+      foreach (array_merge($clients, $clients) as $c) {
+        echo "<span class='client-logo'>" . esc_html($c) . "</span>";
+      }
+      ?>
+    </div>
+  </div>
+</section>
+
+
+<!-- SERVICES -->
+<section id="services" class="section-pad">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="label"><?php echo esc_html(get_theme_mod('services_label', 'What We Do')); ?></span>
+      <h2><?php echo wp_kses(get_theme_mod('services_title', 'End-to-End Business<br>Process Solutions'), ['br'=>[]]); ?></h2>
+      <p><?php echo esc_html(get_theme_mod('services_desc', 'From customer experience to back-office operations, we deliver measurable results across every business function.')); ?></p>
+    </div>
+    <div class="services-grid">
+      <?php
+      $posts = get_posts(['post_type'=>'service','posts_per_page'=>-1,'orderby'=>'menu_order','post_status'=>'publish']);
+      if ($posts) :
+        foreach ($posts as $i => $post) :
+          $icon  = get_post_meta($post->ID, 'service_icon', true) ?: '🔧';
+          $link  = get_post_meta($post->ID, 'service_link_url', true) ?: '#contact';
+          $label = get_post_meta($post->ID, 'service_link_label', true) ?: 'Learn more';
+          $desc  = $post->post_excerpt ?: wp_trim_words(strip_tags($post->post_content), 20);
+      ?>
+      <div class="service-card reveal" style="transition-delay:<?php echo $i*0.1; ?>s">
+        <div class="service-icon"><?php echo esc_html($icon); ?></div>
+        <h3><?php echo esc_html($post->post_title); ?></h3>
+        <p><?php echo esc_html($desc); ?></p>
+        <a href="<?php echo esc_url($link); ?>" class="service-link"><?php echo esc_html($label); ?> →</a>
+      </div>
+      <?php endforeach;
+      else :
+        $defaults = [
+          ['🎯','Customer Experience','service_cx','Omnichannel support, CX transformation, and loyalty programs that turn customers into brand advocates.'],
+          ['💼','Finance & Accounting','service_fa','AP/AR automation, financial reporting, reconciliation, and compliance management at enterprise scale.'],
+          ['🤖','AI & Automation','service_ai','Intelligent process automation, RPA deployment, and AI-powered workflows that eliminate manual effort.'],
+          ['📊','Data Analytics','service_da','Advanced analytics, BI dashboards, and predictive models that turn raw data into strategic advantage.'],
+          ['👥','HR Outsourcing','service_hr','Payroll, talent acquisition, benefits administration, and HR compliance across 50+ countries.'],
+          ['🔒','IT Services','service_it','Managed IT services, cybersecurity, cloud migration, and 24/7 infrastructure support.'],
+        ];
+        foreach ($defaults as $i => [$icon, $title, $key, $desc]) :
+      ?>
+      <div class="service-card reveal" style="transition-delay:<?php echo $i*0.1; ?>s">
+        <div class="service-icon"><?php echo esc_html(get_theme_mod("{$key}_icon", $icon)); ?></div>
+        <h3><?php echo esc_html(get_theme_mod("{$key}_title", $title)); ?></h3>
+        <p><?php echo esc_html(get_theme_mod("{$key}_desc", $desc)); ?></p>
+        <a href="#contact" class="service-link">Learn more →</a>
+      </div>
+      <?php endforeach;
+      endif; ?>
+    </div>
+  </div>
+</section>
+
+
+<!-- ABOUT -->
+<section id="about" class="section-pad">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-visual reveal">
+        <div class="about-image-wrap">
+          <div class="about-image-inner">🏢</div>
+        </div>
+        <div class="about-badge-float">
+          <div>
+            <div class="badge-num"><?php echo nexaflow_hero('about_years_num', '20+'); ?></div>
+            <div class="badge-lbl"><?php echo nexaflow_hero('about_years_lbl', 'Years of Industry Expertise'); ?></div>
+          </div>
+        </div>
+      </div>
+      <div class="about-content reveal reveal-delay-1">
+        <span class="label"><?php echo nexaflow_hero('about_label', 'Why NexaFlow'); ?></span>
+        <h2><?php echo nexaflow_hero('about_title', "We're Not Just an Outsourcing Company"); ?></h2>
+        <p><?php echo nexaflow_hero('about_desc', "We're your strategic growth partner. With deep domain expertise, cutting-edge technology, and a global delivery model, we help you achieve operational excellence while you focus on what matters most — your core business."); ?></p>
+        <div class="feature-list">
+          <?php
+          $feature_defaults = [
+            1 => ['🌍','Global Delivery Network','32 delivery centers across 18 countries, ensuring 24/7 support and business continuity.'],
+            2 => ['🔬','Technology-First Approach','Proprietary AI and automation tools that drive 40% faster processing and 60% cost reduction.'],
+            3 => ['📋','ISO 27001 & SOC 2 Certified','Rigorous security standards and compliance frameworks across all service lines.'],
+            4 => ['📈','Outcome-Based Pricing','Pay for results, not headcount. SLA-backed commitments with full transparency.'],
+          ];
+          for ($i = 1; $i <= 4; $i++) :
+            $icon  = get_theme_mod("feature_{$i}_icon",  $feature_defaults[$i][0]);
+            $title = get_theme_mod("feature_{$i}_title", $feature_defaults[$i][1]);
+            $desc  = get_theme_mod("feature_{$i}_desc",  $feature_defaults[$i][2]);
+          ?>
+          <div class="feature-item">
+            <div class="feature-check"><?php echo esc_html($icon); ?></div>
+            <div class="feature-text">
+              <strong><?php echo esc_html($title); ?></strong>
+              <span><?php echo esc_html($desc); ?></span>
+            </div>
+          </div>
+          <?php endfor; ?>
+        </div>
+        <a href="<?php echo esc_url(get_theme_mod('about_cta_url', '#contact')); ?>" class="btn btn-dark">
+          <?php echo nexaflow_hero('about_cta_text', 'Schedule a Discovery Call'); ?> →
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- INDUSTRIES -->
+<section id="industries" class="section-pad">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="label">Industries We Serve</span>
+      <h2><?php echo wp_kses(get_theme_mod('industries_section_title', 'Deep Domain Expertise<br>Across Key Verticals'), ['br'=>[]]); ?></h2>
+      <p>We understand the unique challenges of your industry and deliver solutions built for your specific context.</p>
+    </div>
+    <div class="industries-grid">
+      <?php
+      $raw_json  = get_theme_mod('industries_json', '');
+      $industries = $raw_json ? json_decode($raw_json, true) : null;
+      if (!is_array($industries)) {
+        $industries = [
+          ['🏦','Banking & Finance','Risk, compliance, and digital banking'],
+          ['🏥','Healthcare','Patient services, billing & compliance'],
+          ['🛒','Retail & E-Commerce','CX, fulfillment & supply chain'],
+          ['✈️','Travel & Hospitality','Booking, loyalty & support'],
+          ['📡','Telecom & Media','Subscriber services & network ops'],
+          ['🏭','Manufacturing','Supply chain & procurement'],
+          ['🏛️','Government','Citizen services & back-office'],
+          ['🎓','Education','Admissions, LMS & student support'],
+        ];
+        $industries = array_map(fn($r) => ['icon'=>$r[0],'title'=>$r[1],'description'=>$r[2]], $industries);
+      }
+      foreach ($industries as $i => $ind) :
+      ?>
+      <div class="industry-card reveal" style="transition-delay:<?php echo $i*0.08; ?>s">
+        <div class="industry-icon"><?php echo esc_html($ind['icon']); ?></div>
+        <h4><?php echo esc_html($ind['title']); ?></h4>
+        <p><?php echo esc_html($ind['description']); ?></p>
+      </div>
+      <?php endforeach; ?>
+    </div>
+  </div>
+</section>
+
+
+<!-- TESTIMONIALS -->
+<section id="testimonials" class="section-pad">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="label">Client Stories</span>
+      <h2><?php echo esc_html(get_theme_mod('testimonials_title', 'What Our Clients Say')); ?></h2>
+      <p><?php echo esc_html(get_theme_mod('testimonials_desc', "Don't take our word for it. Here's what business leaders say about working with NexaFlow.")); ?></p>
+    </div>
+    <div class="testimonials-grid">
+      <?php
+      $posts = get_posts(['post_type'=>'testimonial','posts_per_page'=>-1,'orderby'=>'menu_order','post_status'=>'publish']);
+      if ($posts) :
+        foreach ($posts as $i => $post) :
+          $rating   = get_post_meta($post->ID, 'testimonial_rating', true) ?: 5;
+          $aname    = get_post_meta($post->ID, 'testimonial_author_name', true) ?: $post->post_title;
+          $arole    = get_post_meta($post->ID, 'testimonial_author_role', true);
+          $acompany = get_post_meta($post->ID, 'testimonial_author_company', true);
+          $stars    = str_repeat('★', intval($rating));
+          $initials = implode('', array_map(fn($w) => strtoupper($w[0]), array_slice(explode(' ', $aname), 0, 2)));
+      ?>
+      <div class="testimonial-card reveal" style="transition-delay:<?php echo $i*0.15; ?>s">
+        <div class="stars"><?php echo $stars; ?></div>
+<div class="testimonial-text">
+    <?php echo apply_filters('the_content', $post->post_content); ?>
+</div>
+        <div class="testimonial-author">
+          <div class="author-avatar"><?php echo esc_html(substr($initials,0,2)); ?></div>
+          <div>
+            <div class="author-name"><?php echo esc_html($aname); ?></div>
+            <div class="author-role"><?php echo esc_html(($arole ? $arole.', ' : '') . $acompany); ?></div>
+          </div>
+        </div>
+      </div>
+      <?php endforeach;
+      else :
+        $defaults = [
+          ['★★★★★','TechPros transformed our customer service operations completely. Response time dropped by 60% and CSAT jumped from 74% to 94% within 6 months. Remarkable execution.','Sarah Mitchell','Chief Operations Officer, FinCorp Global'],
+          ['★★★★★','Their AI automation solution eliminated 70% of our manual data processing tasks. The ROI was evident in the first quarter — a 3.2x return on investment. Highly recommend.','David Chen','VP of Technology, RetailMax Inc'],
+          ['★★★★★','Working with TechPros felt like having an extension of our own team. They understood our healthcare compliance needs deeply and delivered flawlessly. True partners.','Dr. Priya Sharma','Director of Operations, MedCare Systems'],
+        ];
+        foreach ($defaults as $i => [$stars, $text, $name, $role]) :
+          $initials = implode('', array_map(fn($w) => $w[0], explode(' ', $name)));
+      ?>
+      <div class="testimonial-card reveal" style="transition-delay:<?php echo $i*0.15; ?>s">
+        <div class="stars"><?php echo $stars; ?></div>
+        <p class="testimonial-text">"<?php echo esc_html($text); ?>"</p>
+        <div class="testimonial-author">
+          <div class="author-avatar"><?php echo substr($initials,0,2); ?></div>
+          <div>
+            <div class="author-name"><?php echo $name; ?></div>
+            <div class="author-role"><?php echo $role; ?></div>
+          </div>
+        </div>
+      </div>
+      <?php endforeach;
+      endif; ?>
+    </div>
+  </div>
+</section>
+
+
+<!-- CTA -->
+<section id="cta">
+  <div class="container">
+    <div class="cta-inner reveal">
+      <span class="label" style="color:var(--color-accent);display:block;margin-bottom:20px;">
+        <?php echo nexaflow_hero('cta_label', 'Ready to Transform?'); ?>
+      </span>
+      <h2><?php echo wp_kses(get_theme_mod('cta_title', "Let's Build Your<br>Operational Advantage"), ['br'=>[]]); ?></h2>
+      <p><?php echo esc_html(get_theme_mod('cta_desc', 'Schedule a free 30-minute consultation with our solutions team. No commitment, no hard sell — just a conversation about your goals.')); ?></p>
+      <div class="cta-actions">
+        <a href="<?php echo esc_url(get_theme_mod('cta_btn_1_url', '#contact')); ?>" class="btn btn-primary" style="font-size:1rem;padding:16px 36px;">
+          <?php echo nexaflow_hero('cta_btn_1_text', 'Get Free Consultation'); ?> →
+        </a>
+        <a href="tel:<?php echo esc_attr(preg_replace('/[^+\d]/','',get_theme_mod('contact_phone','+18001234567'))); ?>" class="btn btn-outline" style="font-size:1rem;padding:16px 36px;">
+          📞 <?php echo esc_html(get_theme_mod('contact_phone', '+1 800 123 4567')); ?>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- CONTACT FORM -->
+<section id="contact" class="section-pad" style="background:var(--color-light);">
+  <div class="container">
+    <div style="max-width:640px;margin:0 auto;text-align:center;" class="reveal">
+      <span class="label" style="display:block;margin-bottom:16px;">Contact Us</span>
+      <h2 style="color:var(--color-primary);margin-bottom:16px;"><?php echo nexaflow_hero('contact_title', 'Get in Touch'); ?></h2>
+      <p style="margin-bottom:48px;"><?php echo nexaflow_hero('contact_subtitle', 'Fill out the form and our team will reach out within 24 hours.'); ?></p>
+    </div>
+    <div style="max-width:700px;margin:0 auto;background:white;border-radius:24px;padding:48px;box-shadow:var(--shadow-md);" class="reveal">
+      <?php if (function_exists('wpcf7_contact_form')) : ?>
+        <?php echo do_shortcode('[contact-form-7 id="1" title="Contact form 1"]'); ?>
+      <?php else : ?>
+      <form id="nexaflow-contact" style="display:flex;flex-direction:column;gap:20px;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+          <div>
+            <label style="display:block;font-size:0.875rem;font-weight:600;color:var(--color-primary);margin-bottom:8px;">First Name *</label>
+            <input type="text" name="first_name" required  style="width:100%;padding:14px 16px;border:1.5px solid var(--color-gray-light);border-radius:8px;font-family:var(--font-body);font-size:1rem;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='var(--color-accent)'" onblur="this.style.borderColor='var(--color-gray-light)'">
+          </div>
+          <div>
+            <label style="display:block;font-size:0.875rem;font-weight:600;color:var(--color-primary);margin-bottom:8px;">Last Name *</label>
+            <input type="text" name="last_name" required  style="width:100%;padding:14px 16px;border:1.5px solid var(--color-gray-light);border-radius:8px;font-family:var(--font-body);font-size:1rem;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='var(--color-accent)'" onblur="this.style.borderColor='var(--color-gray-light)'">
+          </div>
+        </div>
+        <div>
+          <label style="display:block;font-size:0.875rem;font-weight:600;color:var(--color-primary);margin-bottom:8px;">Work Email *</label>
+          <input type="email" name="email" required  style="width:100%;padding:14px 16px;border:1.5px solid var(--color-gray-light);border-radius:8px;font-family:var(--font-body);font-size:1rem;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='var(--color-accent)'" onblur="this.style.borderColor='var(--color-gray-light)'">
+        </div>
+        <div>
+          <label style="display:block;font-size:0.875rem;font-weight:600;color:var(--color-primary);margin-bottom:8px;">Company *</label>
+          <input type="text" name="company" required  style="width:100%;padding:14px 16px;border:1.5px solid var(--color-gray-light);border-radius:8px;font-family:var(--font-body);font-size:1rem;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='var(--color-accent)'" onblur="this.style.borderColor='var(--color-gray-light)'">
+        </div>
+        <div>
+          <label style="display:block;font-size:0.875rem;font-weight:600;color:var(--color-primary);margin-bottom:8px;">Service Interest</label>
+          <select name="service" style="width:100%;padding:14px 16px;border:1.5px solid var(--color-gray-light);border-radius:8px;font-family:var(--font-body);font-size:1rem;outline:none;background:white;cursor:pointer;">
+            <option>Select a service</option>
+            <?php
+            $svc_posts = get_posts(['post_type'=>'service','posts_per_page'=>-1,'orderby'=>'menu_order']);
+            if ($svc_posts) foreach ($svc_posts as $s) echo '<option>'.esc_html($s->post_title).'</option>';
+            else foreach (['Customer Experience','Finance & Accounting','AI & Automation','Data Analytics','HR Outsourcing','IT Services'] as $s) echo "<option>{$s}</option>";
+            ?>
+          </select>
+        </div>
+        <div>
+          <label style="display:block;font-size:0.875rem;font-weight:600;color:var(--color-primary);margin-bottom:8px;">Message</label>
+          <textarea name="message" rows="4" placeholder="Tell us about your business challenges..." style="width:100%;padding:14px 16px;border:1.5px solid var(--color-gray-light);border-radius:8px;font-family:var(--font-body);font-size:1rem;outline:none;resize:vertical;transition:border-color 0.2s;" onfocus="this.style.borderColor='var(--color-accent)'" onblur="this.style.borderColor='var(--color-gray-light)'"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;font-size:1rem;padding:16px;">
+          <?php echo nexaflow_hero('contact_btn_text', 'Send Message'); ?> →
+        </button>
+      </form>
+      <?php endif; ?>
+    </div>
+  </div>
+</section>
+
+
+<?php get_footer(); ?>
