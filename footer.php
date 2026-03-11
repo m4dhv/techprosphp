@@ -33,12 +33,14 @@
       <div class="footer-col">
         <h5>Company</h5>
         <ul>
-          <li><a href="<?php echo esc_url(home_url('/index.php/about')); ?>">About Us</a></li>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#industries">Industries</a></li>
           <li><a href="<?php echo esc_url(get_post_type_archive_link('service')); ?>">Case Studies</a></li>
           <li><a href="<?php echo esc_url(home_url('/blog')); ?>">Insights</a></li>
           <li><a href="<?php echo esc_url(home_url('/index.php/privacy-policy')); ?>">Privacy Policy</a></li>
+          <li><a href="#">Careers</a></li>
           <li><a href="<?php echo esc_url(home_url('/index.php/feedback')); ?>">Feedback</a></li>
-          <li><a href="<?php echo esc_url(home_url('/index.php/our-services')); ?>">Services</a></li>
+          <li><a href="<?php echo esc_url(home_url('/index.php/contact')); ?>">Contact</a></li>
         </ul>
       </div>
 
@@ -49,8 +51,7 @@
             <?php echo esc_html(get_theme_mod('contact_phone','+1 800 123 4567')); ?></a></li>
           <li><a href="mailto:<?php echo esc_attr(get_theme_mod('contact_email','hello@nexaflow.com')); ?>">
             <?php echo esc_html(get_theme_mod('contact_email','hello@nexaflow.com')); ?></a></li>
-          <li><a href="<?php echo esc_url(home_url('/index.php/contact')); ?>">Contact Us</a></li>
-            <li><?php echo esc_html(get_theme_mod('contact_address_1','New York, NY 10001')); ?></li>
+          <li><?php echo esc_html(get_theme_mod('contact_address_1','New York, NY 10001')); ?></li>
           <li><?php echo esc_html(get_theme_mod('contact_address_2','London, UK')); ?></li>
         </ul>
       </div>
@@ -67,9 +68,6 @@
     </div>
   </div>
 </footer>
-
-<button id="scrollTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})" style="position:fixed;bottom:2rem;right:2rem;background:#000;color:#fff;border:none;border-radius:50%;width:64px;height:64px;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,0.3);z-index:9999;display:none;align-items:center;justify-content:center;" onmouseover="this.style.background='#333'" onmouseout="this.style.background='#000'"><svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"/></svg></button>
-<script>var b=document.getElementById('scrollTopBtn');window.onscroll=function(){b.style.display=window.scrollY>300?'flex':'none'};</script>
 
 <?php wp_footer(); ?>
 </body>

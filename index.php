@@ -10,7 +10,7 @@
       <div class="hero-content">
         <div class="hero-badge">
           <span class="dot"></span>
-          <span><?php echo nexaflow_hero('hero_badge', 'Trusted by 500+ Global Clients'); ?></span>
+          <span><?php echo nexaflow_hero('hero_badge', 'Trusted by 500+ Global Enterprises'); ?></span>
         </div>
         <h1 class="hero-title">
           <?php echo nexaflow_hero('hero_title_1', 'Intelligent BPO'); ?><br>
@@ -109,125 +109,74 @@
     </div>
   </div>
 </section>
+
+
 <!-- CLIENTS -->
 <section id="clients">
   <div class="container">
-    <h2 class="clients-label"><?php echo esc_html(get_theme_mod('clients_label', 'Technology Stack')); ?></h2>
+    <p class="clients-label"><?php echo esc_html(get_theme_mod('clients_label', 'Trusted by leading companies worldwide')); ?></p>
     <div class="logos-track">
       <?php
-      $raw     = get_theme_mod('clients_list', 'Python, PHP, GoLang, AWS, Microsoft Azure, Swift, SQL, and many more...');
+      $raw     = get_theme_mod('clients_list', 'Accenture,Deloitte,JPMorgan,Unilever,Microsoft,Samsung,Pfizer,Walmart');
       $clients = array_filter(array_map('trim', explode(',', $raw)));
-
-      // Changed: Loop through the array once instead of merging it with itself
-      foreach ($clients as $c) {
+      // Double for seamless scroll loop
+      foreach (array_merge($clients, $clients) as $c) {
         echo "<span class='client-logo'>" . esc_html($c) . "</span>";
       }
       ?>
     </div>
   </div>
 </section>
-</section>
+
+
 <!-- SERVICES -->
 <section id="services" class="section-pad">
   <div class="container">
-
-    <div class="section-header reveal" style="text-align:center;">
+    <div class="section-header reveal">
       <span class="label"><?php echo esc_html(get_theme_mod('services_label', 'What We Do')); ?></span>
       <h2><?php echo wp_kses(get_theme_mod('services_title', 'End-to-End Business<br>Process Solutions'), ['br'=>[]]); ?></h2>
-      <p style="max-width:600px;margin:0 auto;"><?php echo esc_html(get_theme_mod('services_desc', 'From customer experience to back-office operations, we deliver measurable results across every business function. Over 9+ services as listed on our services page.')); ?></p>
+      <p><?php echo esc_html(get_theme_mod('services_desc', 'From customer experience to back-office operations, we deliver measurable results across every business function.')); ?></p>
     </div>
-
-    <div class="services-preview-grid reveal">
+    <div class="services-grid">
       <?php
-      $preview = [
-        ['🤖', 'AI & Automation'],
-        ['☁️', 'Cloud'],
-        ['🔒', 'Cybersecurity'],
-        ['🏢', 'Enterprise Solutions'],
-      ];
-      foreach ($preview as [$icon, $title]) : ?>
-        <div class="services-preview-pill">
-          <span class="pill-icon"><?php echo esc_html($icon); ?></span>
-          <span><?php echo esc_html($title); ?></span>
-        </div>
-      <?php endforeach; ?>
-    </div>
-
-    <div style="text-align:center;margin-top:48px;" class="reveal">
-      <a class="btn btn-primary" href="<?php echo esc_url(home_url('/index.php/our-services')); ?>">Explore All Services →</a>
-    </div>
-
-  </div>
-</section>
-
-<style>
-.services-preview-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 14px;
-  margin-top: 48px;
-}
-.services-preview-pill {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: #161B39;
-  color: #fff;
-  padding: 12px 22px;
-  border-radius: 50px;
-  font-size: 0.95rem;
-  font-family: var(--font-display);
-  transition: background 0.22s ease, transform 0.22s ease, box-shadow 0.22s ease;
-  cursor: default;
-}
-.services-preview-pill:hover {
-  background: #0d1025;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-}
-.pill-icon {
-  font-size: 1.15rem;
-  line-height: 1;
-}
-</style>
-
-<!-- INDUSTRIES -->
-<section id="industries" class="section-pad">
-  <div class="container">
-    <div class="section-header reveal">
-      <span class="label">Industries We Serve</span>
-      <h2><?php echo wp_kses(get_theme_mod('industries_section_title', 'Deep Domain Expertise<br>Across Key Verticals'), ['br'=>[]]); ?></h2>
-      <p>We understand the unique challenges of your industry and deliver solutions built for your specific context.</p>
-    </div>
-    <div class="industries-grid">
-      <?php
-      $raw_json  = get_theme_mod('industries_json', '');
-      $industries = $raw_json ? json_decode($raw_json, true) : null;
-      if (!is_array($industries)) {
-        $industries = [
-          ['🏦','Banking & Finance','Risk, compliance, and digital banking'],
-          ['🏥','Healthcare','Patient services, billing & compliance'],
-          ['🛒','Retail & E-Commerce','CX, fulfillment & supply chain'],
-          ['✈️','Travel & Hospitality','Booking, loyalty & support'],
-          ['📡','Telecom & Media','Subscriber services & network ops'],
-          ['🏭','Manufacturing','Supply chain & procurement'],
-          ['🏛️','Government','Citizen services & back-office'],
-          ['🎓','Education','Admissions, LMS & student support'],
-        ];
-        $industries = array_map(fn($r) => ['icon'=>$r[0],'title'=>$r[1],'description'=>$r[2]], $industries);
-      }
-      foreach ($industries as $i => $ind) :
+      $posts = get_posts(['post_type'=>'service','posts_per_page'=>-1,'orderby'=>'menu_order','post_status'=>'publish']);
+      if ($posts) :
+        foreach ($posts as $i => $post) :
+          $icon  = get_post_meta($post->ID, 'service_icon', true) ?: '🔧';
+          $link  = get_post_meta($post->ID, 'service_link_url', true) ?: '#contact';
+          $label = get_post_meta($post->ID, 'service_link_label', true) ?: 'Learn more';
+          $desc  = $post->post_excerpt ?: wp_trim_words(strip_tags($post->post_content), 20);
       ?>
-      <div class="industry-card reveal" style="transition-delay:<?php echo $i*0.08; ?>s">
-        <div class="industry-icon"><?php echo esc_html($ind['icon']); ?></div>
-        <h4><?php echo esc_html($ind['title']); ?></h4>
-        <p><?php echo esc_html($ind['description']); ?></p>
+      <div class="service-card reveal" style="transition-delay:<?php echo $i*0.1; ?>s">
+        <div class="service-icon"><?php echo esc_html($icon); ?></div>
+        <h3><?php echo esc_html($post->post_title); ?></h3>
+        <p><?php echo esc_html($desc); ?></p>
+        <a href="<?php echo esc_url($link); ?>" class="service-link"><?php echo esc_html($label); ?> →</a>
       </div>
-      <?php endforeach; ?>
+      <?php endforeach;
+      else :
+        $defaults = [
+          ['🎯','Customer Experience','service_cx','Omnichannel support, CX transformation, and loyalty programs that turn customers into brand advocates.'],
+          ['💼','Finance & Accounting','service_fa','AP/AR automation, financial reporting, reconciliation, and compliance management at enterprise scale.'],
+          ['🤖','AI & Automation','service_ai','Intelligent process automation, RPA deployment, and AI-powered workflows that eliminate manual effort.'],
+          ['📊','Data Analytics','service_da','Advanced analytics, BI dashboards, and predictive models that turn raw data into strategic advantage.'],
+          ['👥','HR Outsourcing','service_hr','Payroll, talent acquisition, benefits administration, and HR compliance across 50+ countries.'],
+          ['🔒','IT Services','service_it','Managed IT services, cybersecurity, cloud migration, and 24/7 infrastructure support.'],
+        ];
+        foreach ($defaults as $i => [$icon, $title, $key, $desc]) :
+      ?>
+      <div class="service-card reveal" style="transition-delay:<?php echo $i*0.1; ?>s">
+        <div class="service-icon"><?php echo esc_html(get_theme_mod("{$key}_icon", $icon)); ?></div>
+        <h3><?php echo esc_html(get_theme_mod("{$key}_title", $title)); ?></h3>
+        <p><?php echo esc_html(get_theme_mod("{$key}_desc", $desc)); ?></p>
+        <a href="#contact" class="service-link">Learn more →</a>
+      </div>
+      <?php endforeach;
+      endif; ?>
     </div>
   </div>
 </section>
+
 
 <!-- ABOUT -->
 <section id="about" class="section-pad">
@@ -279,6 +228,42 @@
 </section>
 
 
+<!-- INDUSTRIES -->
+<section id="industries" class="section-pad">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="label">Industries We Serve</span>
+      <h2><?php echo wp_kses(get_theme_mod('industries_section_title', 'Deep Domain Expertise<br>Across Key Verticals'), ['br'=>[]]); ?></h2>
+      <p>We understand the unique challenges of your industry and deliver solutions built for your specific context.</p>
+    </div>
+    <div class="industries-grid">
+      <?php
+      $raw_json  = get_theme_mod('industries_json', '');
+      $industries = $raw_json ? json_decode($raw_json, true) : null;
+      if (!is_array($industries)) {
+        $industries = [
+          ['🏦','Banking & Finance','Risk, compliance, and digital banking'],
+          ['🏥','Healthcare','Patient services, billing & compliance'],
+          ['🛒','Retail & E-Commerce','CX, fulfillment & supply chain'],
+          ['✈️','Travel & Hospitality','Booking, loyalty & support'],
+          ['📡','Telecom & Media','Subscriber services & network ops'],
+          ['🏭','Manufacturing','Supply chain & procurement'],
+          ['🏛️','Government','Citizen services & back-office'],
+          ['🎓','Education','Admissions, LMS & student support'],
+        ];
+        $industries = array_map(fn($r) => ['icon'=>$r[0],'title'=>$r[1],'description'=>$r[2]], $industries);
+      }
+      foreach ($industries as $i => $ind) :
+      ?>
+      <div class="industry-card reveal" style="transition-delay:<?php echo $i*0.08; ?>s">
+        <div class="industry-icon"><?php echo esc_html($ind['icon']); ?></div>
+        <h4><?php echo esc_html($ind['title']); ?></h4>
+        <p><?php echo esc_html($ind['description']); ?></p>
+      </div>
+      <?php endforeach; ?>
+    </div>
+  </div>
+</section>
 
 
 <!-- TESTIMONIALS -->
