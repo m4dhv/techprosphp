@@ -15,8 +15,8 @@
   <button class="mobile-close" id="mobile-close" aria-label="Close menu">✕</button>
   <ul>
     <li><a href="<?php echo esc_url(home_url('/')); ?>">Home</a></li>
-    <li><a href="#services">Services</a></li>
-    <li><a href="#about">About Us</a></li>
+    <li><a href="<?php echo esc_url(home_url('/index.php/our-services')); ?>">Services</a></li>
+    <li><a href="<?php echo esc_url(home_url('/index.php/about')); ?>">About Us</a></li>
     <li><a href="#industries">Industries</a></li>
     <li><a href="#testimonials">Clients</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -44,10 +44,11 @@
           wp_nav_menu(['theme_location'=>'primary','container'=>false,'items_wrap'=>'<ul>%3$s</ul>']);
         else : ?>
         <ul>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#about">About Us</a></li>
-          <li><a href="#industries">Industries</a></li>
-          <li><a href="#testimonials">Clients</a></li>
+    <li><a href="<?php echo esc_url(home_url('/index.php/our-services')); ?>">Services</a></li>
+              <li><a href="<?php echo esc_url(home_url('/index.php/about')); ?>">About Us</a></li>
+          <li><a href="<?php echo esc_url(home_url('/#industries')); ?>">Industries</a></li>
+        <li><a href="<?php echo esc_url(home_url('/#testimonials')); ?>">Clients</a></li>
+          <li><a href="<?php echo esc_url(home_url('/index.php/contact')); ?>">Contact</a></li>
         </ul>
         <?php endif; ?>
       </nav>
