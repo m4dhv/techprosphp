@@ -17,7 +17,11 @@ get_header();
     <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(0,194,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,194,255,0.04) 1px,transparent 1px);background-size:60px 60px;"></div>
 
     <div class="container" style="position:relative;z-index:1; text-align: center;">
-
+<!-- ADD BREADCRUMBS HERE -->
+<nav style="margin-top: 16px; font-size: 0.875rem; color: rgba(255,255,255,0.5); text-align: left;">  <a href="<?php echo home_url(); ?>" style="color:rgba(255,255,255,0.5);">Home</a> &rsaquo;
+  <a href="<?php echo get_post_type_archive_link('service'); ?>" style="color:rgba(255,255,255,0.5);">Services</a> &rsaquo;
+  <span style="color:rgba(255,255,255,0.8);"><?php the_title(); ?></span>
+</nav>
 <span class="label" style="display:inline-block; margin-bottom:16px; color: var(--color-accent);"><?php echo esc_html( get_post_meta( get_the_ID(), 'hero_label', true ) ?: 'know more about our' ); ?></span>      <h1 style="color: white; font-family: var(--font-display); font-size: 3.5rem; margin: 0;"><?php the_title(); ?></h1>
 <span class="label" style="display:inline-block; margin-top:12px; color: var(--color-accent);">Services</span>
 

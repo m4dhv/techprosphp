@@ -39,8 +39,8 @@ get_header(); ?>
               <div style="width: 48px; height: 48px; background: var(--color-light); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.25rem;">📧</div>
               <div>
                 <h4 style="color: var(--color-primary); margin-bottom: 4px;">Email Us</h4>
-                <a href="mailto:<?php echo esc_attr(get_theme_mod('contact_email', 'hello@nexaflow.com')); ?>" style="color: var(--color-accent); font-weight: 500; text-decoration: none;">
-                  <?php echo esc_html(get_theme_mod('contact_email', 'hello@nexaflow.com')); ?>
+                <a href="mailto:<?php echo esc_attr(get_theme_mod('contact_email', 'hello@techpros.com')); ?>" style="color: var(--color-accent); font-weight: 500; text-decoration: none;">
+                  <?php echo esc_html(get_theme_mod('contact_email', 'hello@techpros.com')); ?>
                 </a>
               </div>
             </div>

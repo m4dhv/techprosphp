@@ -64,16 +64,6 @@ get_header();
 }
 </style>
 
-<section class="tp-hero-banner">
-    <?php
-    if ( has_post_thumbnail() ) {
-        the_post_thumbnail( 'full', [ 'alt' => get_the_title() ] );
-    } else {
-        // Fallback: bundled hero image placed in /images/services.png
-        echo '<img src="' . esc_url( get_template_directory_uri() . '/images/services.png' ) . '" alt="' . esc_attr( get_the_title() ) . '">';
-    }
-    ?>
-</section>
 <section id="services" class="section-pad">
   <div class="container">
     <div class="section-header reveal">

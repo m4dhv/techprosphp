@@ -245,7 +245,7 @@
         </div>
       </div>
       <div class="about-content reveal reveal-delay-1">
-        <span class="label"><?php echo nexaflow_hero('about_label', 'Why NexaFlow'); ?></span>
+        <span class="label"><?php echo nexaflow_hero('about_label', 'Why TechPros'); ?></span>
         <h2><?php echo nexaflow_hero('about_title', "We're Not Just an Outsourcing Company"); ?></h2>
         <p><?php echo nexaflow_hero('about_desc', "We're your strategic growth partner. With deep domain expertise, cutting-edge technology, and a global delivery model, we help you achieve operational excellence while you focus on what matters most — your core business."); ?></p>
         <div class="feature-list">
@@ -287,7 +287,7 @@
     <div class="section-header reveal">
       <span class="label">Client Stories</span>
       <h2><?php echo esc_html(get_theme_mod('testimonials_title', 'What Our Clients Say')); ?></h2>
-      <p><?php echo esc_html(get_theme_mod('testimonials_desc', "Don't take our word for it. Here's what business leaders say about working with NexaFlow.")); ?></p>
+      <p><?php echo esc_html(get_theme_mod('testimonials_desc', "Don't take our word for it. Here's what business leaders say about working with TechPros.")); ?></p>
     </div>
     <div class="testimonials-grid">
       <?php
