@@ -2,65 +2,101 @@
 /**
  * Template Name: Services Page
  *
- *
- * - Hero image spans full viewport (use the page's Featured Image)
- * - Anything added in the WordPress page editor appears below
- *
  * @package TechPros
  */
 get_header();
 ?>
-<main class="tp-page-content style="padding-top: 0; min-height: 80vh;">
-    <section style="background: var(--color-primary); padding: 80px 0; position: relative; overflow: hidden;">
-    <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(0,194,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,194,255,0.04) 1px,transparent 1px);background-size:60px 60px;"></div>
-    <div class="container" style="position:relative;z-index:1; text-align: center;">
-<span class="label" style="display:inline-block; margin-bottom:16px; color: var(--color-accent);"><?php echo esc_html( get_post_meta( get_the_ID(), 'hero_label', true ) ?: 'What We Do' ); ?></span>      <h1 style="color: white; font-family: var(--font-display); font-size: 3.5rem; margin: 0;"><?php the_title(); ?></h1>
+<main class="tp-page-content" style="padding-top: 0; min-height: 80vh;">
+  <section class="tp-hero">
+    <div class="tp-hero__grid"></div>
+    <div class="tp-hero__content tp-fadein">
+      <nav class="tp-hero__breadcrumb">
+        <a href="<?php echo home_url(); ?>">Home</a> &rsaquo;
+        <span><?php echo esc_html( get_the_title() ); ?></span>
+      </nav>
+      <span class="label" style="display:inline-block; margin-bottom:16px; color: var(--color-accent);">
+        <?php echo esc_html( get_post_meta( get_the_ID(), 'hero_label', true ) ?: 'What We Do' ); ?>
+      </span>
+      <h1 class="tp-hero__title"><?php the_title(); ?></h1>
+      <?php
+        $hero_desc = get_post_meta( get_the_ID(), 'hero_description', true );
+        if ( $hero_desc ) : ?>
+          <p class="tp-hero__desc"><?php echo esc_html( $hero_desc ); ?></p>
+      <?php endif; ?>
     </div>
   </section>
-           
-        </main>
+
 <style>
-.tp-hero-banner {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    overflow: hidden;
+/* ── Hero ─────────────────────────────────────────────────────── */
+.tp-hero {
+  position: relative;
+  min-height: 480px;
+  background: var(--color-primary);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
 }
 
-.tp-hero-banner img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    display: block;
+.tp-hero__grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0,194,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,194,255,0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
 }
 
-/* Vignette so the nav stays readable */
-.tp-hero-banner::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-        to bottom,
-        rgba(10, 15, 46, 0.50) 0%,
-        rgba(10, 15, 46, 0.08) 45%,
-        rgba(10, 15, 46, 0.08) 60%,
-        rgba(10, 15, 46, 0.40) 100%
-    );
+.tp-hero__content {
+  position: relative;
+  z-index: 1;
+  padding: 80px max(40px, calc((100vw - 1280px) / 2 + 40px));
 }
 
-/* WordPress editor content sits below the hero */
-.tp-page-content {
-    background: var(--color-white, #fff);
+/* Breadcrumb */
+.tp-hero__breadcrumb {
+  font-size: 0.875rem;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 20px;
+}
+.tp-hero__breadcrumb a {
+  color: rgba(255,255,255,0.5);
+  text-decoration: none;
+}
+.tp-hero__breadcrumb a:hover {
+  color: rgba(255,255,255,0.85);
+}
+.tp-hero__breadcrumb span {
+  color: rgba(255,255,255,0.8);
 }
 
-.tp-page-content .entry-content {
-    max-width: 860px;
-    margin: 0 auto;
-    padding: 72px 24px;
-    line-height: 1.9;
+.tp-hero__title {
+  color: #ffffff;
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 3.5vw, 3.5rem);
+  line-height: 1.15;
+  margin: 0 0 20px;
+}
+
+.tp-hero__desc {
+  color: rgba(255,255,255,0.75);
+  font-size: 1.1rem;
+  line-height: 1.7;
+  max-width: 480px;
+  margin: 0;
+}
+
+/* ── Fade-in on load ──────────────────────────────────────────── */
+@keyframes tp-fadein {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.tp-fadein {
+  animation: tp-fadein 0.7s ease both;
+}
+
+@media (max-width: 768px) {
+  .tp-hero__content { padding: 60px 24px; }
 }
 </style>
 
@@ -91,14 +127,14 @@ get_header();
       else :
         $defaults = [
           ['🤖', 'Artificial Intelligence and Automation', 'service_ai',   'Harness the power of AI, machine learning, and advanced analytics to unlock insights and drive data-led decisions across your enterprise.'],
-          ['⚙️', 'Business Analytics',               'service_cbo',   'Reimagine operations with AI-infused intelligent processes that deliver efficiency, resilience, and continuous improvement at scale.'],          
-          ['☁️', 'Cloud Infrastructure',                                        'service_cloud', 'Accelerate your cloud journey with end-to-end migration, modernisation, and managed cloud services across all major platforms.'],
-          ['💡', 'Consulting Operations',                                   'service_con',   'Strategic advisory and transformation consulting that helps organisations navigate complexity and realise sustainable growth.'],
-          ['🔒', 'Cybersecurity',                                'service_cyber', 'Protect your digital estate with end-to-end cybersecurity services—from threat intelligence and risk management to compliance and response.'],
-          ['📊', 'Data Analytics', 'service_data', 'Turn raw data into actionable insights with end-to-end data analytics services—from data collection and processing to visualization, predictive modeling, and strategic decision-making.'],
-          ['🏢', 'Enterprise Solutions',                         'service_es',    'Deploy and optimise leading ERP, CRM, and enterprise platforms to streamline processes and unlock business value organisation-wide.'],
-          ['🏭', 'Industrial Autonomy and Engineering',            'service_iae',   'Drive smart manufacturing and engineering excellence through industrial IoT, digital twins, and autonomous systems integration.'],
-          ['🌐', 'Network Solutions and Services',               'service_net',   'Design, deploy, and manage next-generation networks that deliver the connectivity, reliability, and performance your business demands.'],
+          ['⚙️', 'Business Analytics',               'service_cbo',   'Reimagine operations with AI-infused intelligent processes that deliver efficiency, resilience, and continuous improvement at scale.'],
+          ['☁️', 'Cloud Infrastructure',              'service_cloud', 'Accelerate your cloud journey with end-to-end migration, modernisation, and managed cloud services across all major platforms.'],
+          ['💡', 'Consulting Operations',             'service_con',   'Strategic advisory and transformation consulting that helps organisations navigate complexity and realise sustainable growth.'],
+          ['🔒', 'Cybersecurity',                     'service_cyber', 'Protect your digital estate with end-to-end cybersecurity services—from threat intelligence and risk management to compliance and response.'],
+          ['📊', 'Data Analytics',                    'service_data',  'Turn raw data into actionable insights with end-to-end data analytics services—from data collection and processing to visualization, predictive modeling, and strategic decision-making.'],
+          ['🏢', 'Enterprise Solutions',              'service_es',    'Deploy and optimise leading ERP, CRM, and enterprise platforms to streamline processes and unlock business value organisation-wide.'],
+          ['🏭', 'Industrial Autonomy and Engineering','service_iae',  'Drive smart manufacturing and engineering excellence through industrial IoT, digital twins, and autonomous systems integration.'],
+          ['🌐', 'Network Solutions and Services',    'service_net',   'Design, deploy, and manage next-generation networks that deliver the connectivity, reliability, and performance your business demands.'],
         ];
         foreach ($defaults as $i => [$icon, $title, $key, $desc]) :
           $service_title = get_theme_mod("{$key}_title", $title);
@@ -127,15 +163,9 @@ get_header();
   transform: translateY(-3px);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
 }
-.service-card h3 {
-  color: #ffffff;
-}
-.service-card p {
-  color: #848D8C;
-}
+.service-card h3 { color: #ffffff; }
+.service-card p  { color: #848D8C; }
 </style>
-</section>
-
 
 <!-- CTA -->
 <section id="cta">
@@ -150,10 +180,10 @@ get_header();
         <a href="<?php echo esc_url(home_url('/index.php/contact')); ?>" class="btn btn-primary" style="font-size:1rem;padding:16px 36px;">
           <?php echo nexaflow_hero('cta_btn_1_text', 'Get Free Consultation'); ?> →
         </a>
-       
       </div>
     </div>
   </div>
 </section>
+</main>
 
-<?php get_footer(); ?>  
+<?php get_footer(); ?>

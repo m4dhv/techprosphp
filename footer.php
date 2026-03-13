@@ -27,14 +27,53 @@
       </div>
 
       <div class="footer-col">
-        <h5>Services</h5>
+        <h5><a href="<?php echo esc_url(home_url('/index.php/our-services')); ?>">Services</a></h5>
         <ul>
-          <?php
-          $svc = get_posts(['post_type'=>'service','posts_per_page'=>6,'orderby'=>'menu_order']);
-          if ($svc) foreach ($svc as $s) echo '<li><a href="'.get_permalink($s->ID).'">'.esc_html($s->post_title).'</a></li>';
-          else foreach (['Customer Experience','Finance & Accounting','HR Outsourcing','IT Services','Data Analytics','AI Automation'] as $s)
-            echo "<li><a href='#services'>{$s}</a></li>";
-          ?>
+          <li>
+          <a href="<?php echo esc_url(home_url('/index.php/our-services/artificial-intelligence-and-automation')); ?>">
+            AI &amp; Automation
+          </a>
+        </li>
+        <li>
+          <a href="<?php echo esc_url(home_url('/index.php/our-services/business-analytics')); ?>">
+            Business Analytics
+          </a>
+        </li>
+        <li>
+          <a href="<?php echo esc_url(home_url('/index.php/cloud-infrastructure')); ?>">
+            Cloud Infrastructure
+          </a>
+        </li>
+        <li>
+          <a href="<?php echo esc_url(home_url('/index.php/our-services/consulting-operations')); ?>">
+            Consulting &amp; Ops
+          </a>
+        </li>
+        <li>
+          <a href="<?php echo esc_url(home_url('/index.php/our-services/cybersecurity')); ?>">
+            Cybersecurity
+          </a>
+        </li>
+        <li>
+          <a href="<?php echo esc_url(home_url('/index.php/our-services/data-analytics')); ?>">
+            Data Analytics
+          </a>
+        </li>
+        <li>
+          <a href="<?php echo esc_url(home_url('/index.php/our-services/enterprise-solutions')); ?>">
+            Enterprise Solutions
+          </a>
+        </li>
+        <li>
+          <a href="<?php echo esc_url(home_url('/index.php/our-services/industrial-autonomy-and-engineering')); ?>">
+            Industrial Autonomy
+          </a>
+        </li>
+        <li>
+          <a href="<?php echo esc_url(home_url('/index.php/our-services/network-solutions')); ?>">
+            Network Solutions &amp; Services
+          </a>
+        </li>
         </ul>
       </div>
 
@@ -42,8 +81,8 @@
         <h5>Company</h5>
         <ul>
           <li><a href="<?php echo esc_url(home_url('/index.php/about')); ?>">About Us</a></li>
-          <li><a href="<?php echo esc_url(get_post_type_archive_link('service')); ?>">Case Studies</a></li>
-          <li><a href="<?php echo esc_url(home_url('/blog')); ?>">Insights</a></li>
+          <li><a href="<?php echo esc_url(home_url('/index.php/softwares')); ?>">Softwares</a></li>
+          <li><a href="<?php echo esc_url(home_url('/index.php/industries')); ?>">Industries</a></li>
           <li><a href="<?php echo esc_url(home_url('/index.php/privacy-policy')); ?>">Privacy Policy</a></li>
           <li><a href="<?php echo esc_url(home_url('/index.php/feedback')); ?>">Feedback</a></li>
           <li><a href="<?php echo esc_url(home_url('/index.php/our-services')); ?>">Services</a></li>
@@ -80,6 +119,12 @@
 <script>var b=document.getElementById('scrollTopBtn');window.onscroll=function(){b.style.display=window.scrollY>300?'flex':'none'};</script>
 
 <?php wp_footer(); ?>
+<script>
+AOS.init({
+  duration: 800,
+  once: true
+});
+</script>
 </body>
 </html>
 </html>

@@ -34,14 +34,18 @@ $sw_cats  = get_terms(['taxonomy' => 'product_cat', 'hide_empty' => true]);
 ?>
 
 <!-- Hero -->
-<section style="background:var(--color-primary);padding:80px 0;position:relative;overflow:hidden;text-align:center;">
-  <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(0,194,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,194,255,.04) 1px,transparent 1px);background-size:60px 60px;"></div>
-  <div class="container" style="position:relative;z-index:1;">
-    <span style="display:inline-block;margin-bottom:16px;color:var(--color-accent);font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;">
+<section class="tp-hero">
+  <div class="tp-hero__grid"></div>
+  <div class="tp-hero__content tp-fadein">
+    <nav class="tp-hero__breadcrumb">
+      <a href="<?php echo home_url(); ?>">Home</a> &rsaquo;
+      <span><?php echo esc_html( get_the_title() ); ?></span>
+    </nav>
+    <span class="label" style="display:inline-block;margin-bottom:16px;color:var(--color-accent);">
       <?php echo esc_html(get_post_meta(get_the_ID(), 'hero_label', true) ?: 'Browse Our'); ?>
     </span>
-    <h1 style="color:#fff;font-family:var(--font-display);font-size:3.5rem;margin:0 0 16px;"><?php the_title(); ?></h1>
-    <p style="color:rgba(255,255,255,.65);margin:0;">
+    <h1 class="tp-hero__title"><?php the_title(); ?></h1>
+    <p class="tp-hero__desc">
       <?php echo esc_html(get_post_meta(get_the_ID(), 'hero_subtitle', true) ?: 'Powerful tools to accelerate your business.'); ?>
     </p>
   </div>
@@ -194,10 +198,40 @@ $sw_cats  = get_terms(['taxonomy' => 'product_cat', 'hide_empty' => true]);
 </main>
 
 <style>
+/* ── Hero ─────────────────────────────────────────────────────── */
+.tp-hero { position:relative;min-height:480px;background:var(--color-primary);overflow:hidden;display:flex;align-items:center; }
+.tp-hero__grid { position:absolute;inset:0;background-image:linear-gradient(rgba(0,194,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,194,255,.04) 1px,transparent 1px);background-size:60px 60px;pointer-events:none; }
+.tp-hero__content { position:relative;z-index:1;padding:80px max(40px,calc((100vw - 1280px) / 2 + 40px)); }
+.tp-hero__breadcrumb { font-size:.875rem;color:rgba(255,255,255,.5);margin-bottom:20px; }
+.tp-hero__breadcrumb a { color:rgba(255,255,255,.5);text-decoration:none; }
+.tp-hero__breadcrumb a:hover { color:rgba(255,255,255,.85); }
+.tp-hero__breadcrumb span { color:rgba(255,255,255,.8); }
+.tp-hero__title { color:#fff;font-family:var(--font-display);font-size:clamp(2.2rem,3.5vw,3.5rem);line-height:1.15;margin:0 0 20px; }
+.tp-hero__desc { color:rgba(255,255,255,.75);font-size:1.1rem;line-height:1.7;max-width:480px;margin:0; }
+@keyframes tp-fadein { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
+.tp-fadein { animation:tp-fadein .7s ease both; }
+
 @media (max-width: 768px) {
+  .tp-hero__content { padding: 60px 24px; }
   .container > form > div { grid-template-columns: 1fr !important; }
   aside { border-bottom: 1px solid #e2e8f0; padding-bottom: 24px; }
 }
 </style>
-
+<!-- CTA -->
+<section id="cta">
+  <div class="container">
+    <div class="cta-inner reveal">
+      <span class="label" style="color:var(--color-accent);display:block;margin-bottom:20px;">
+        <?php echo nexaflow_hero('cta_label', 'Ready to Transform?'); ?>
+      </span>
+      <h2><?php echo wp_kses(get_theme_mod('cta_title', "Let's Build Your<br>Operational Advantage"), ['br'=>[]]); ?></h2>
+      <p><?php echo esc_html(get_theme_mod('cta_desc', 'Schedule a free 30-minute consultation with our solutions team. No commitment, no hard sell — just a conversation about your goals.')); ?></p>
+      <div class="cta-actions">
+        <a href="<?php echo esc_url(home_url('/index.php/contact')); ?>" class="btn btn-primary" style="font-size:1rem;padding:16px 36px;">
+          <?php echo nexaflow_hero('cta_btn_1_text', 'Get Free Consultation'); ?> →
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
 <?php get_footer(); ?>

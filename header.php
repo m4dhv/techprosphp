@@ -22,14 +22,14 @@
       --mega-radius: 16px;
       --transition:  220ms cubic-bezier(.4,0,.2,1);
       --font-sans:   'DM Sans', system-ui, sans-serif;
-      --font-display:'Syne', var(--font-sans);
+      --font-display:'Space Grotesk', var(--font-sans);
     }
 
     body { font-family: var(--font-sans); background: var(--c-bg); color: var(--c-text); }
 
     /* Google Fonts */
     @import url('https://fonts.googleapis.com/css2?family=Syne:wght@600;700&family=DM+Sans:wght@400;500;600&display=swap');
-
+    
     a { text-decoration: none; color: inherit; }
     ul { list-style: none; }
 
@@ -307,6 +307,59 @@ li.has-mega::after {
     .mobile-menu ul li a:hover { background: rgba(255,255,255,.06); color: var(--c-text); }
     .mobile-menu .btn { width: 100%; justify-content: center; }
 
+    /* ── Mobile Services Accordion ───────────────────────────── */
+    .mobile-services-toggle {
+      display: flex; align-items: center; justify-content: center;
+      gap: 5px;
+      width: 100%; padding: 11px 14px; border-radius: 8px;
+      background: none; border: none; cursor: pointer;
+      font-size: .95rem; font-weight: 500; color: var(--c-muted);
+      font-family: var(--font-sans);
+      transition: background var(--transition), color var(--transition);
+    }
+    .mobile-services-toggle:hover { background: rgba(255,255,255,.06); color: var(--c-text); }
+    .mobile-services-toggle[aria-expanded="true"] { color: var(--c-text); background: rgba(255,255,255,.04); }
+    .mobile-services-toggle .msv-arrow {
+      font-size: .65rem; opacity: .6;
+      transition: transform var(--transition);
+    }
+    .mobile-services-toggle[aria-expanded="true"] .msv-arrow { transform: rotate(180deg); }
+
+    .mobile-services-dropdown {
+      max-height: 0 !important;
+      overflow: hidden !important;
+      display: flex !important;
+      flex-direction: column;
+      gap: 2px;
+      padding: 0 0 0 12px;
+      transition: max-height 0.3s ease, padding 0.3s ease, margin-top 0.3s ease;
+    }
+    .mobile-services-dropdown.open {
+      max-height: 600px !important;
+      padding: 4px 0 4px 12px;
+      margin-top: 2px;
+    }
+
+    /* "View All Services" top link */
+    .msv-view-all a {
+      display: flex; align-items: center; gap: 8px;
+      padding: 10px 14px; border-radius: 8px;
+      font-size: .875rem; font-weight: 600; color: var(--c-primary);
+      border-bottom: 1px solid var(--c-border);
+      margin-bottom: 4px;
+      transition: background var(--transition);
+    }
+    .msv-view-all a:hover { background: rgba(59,130,246,.08); }
+
+    /* Individual service items */
+    .mobile-services-dropdown li a {
+      display: flex; align-items: center; gap: 10px;
+      padding: 9px 14px; border-radius: 8px;
+      font-size: .875rem; font-weight: 500; color: var(--c-muted);
+      transition: background var(--transition), color var(--transition);
+    }
+    .mobile-services-dropdown li a:hover { background: rgba(255,255,255,.06); color: var(--c-text); }
+
     /* ── Responsive ───────────────────────────────────────── */
     @media (max-width: 1024px) {
       .mega-menu { width: 640px; }
@@ -329,12 +382,77 @@ li.has-mega::after {
 <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation">
   <button class="mobile-close" id="mobile-close" aria-label="Close menu">✕</button>
   <ul>
-    <li><a href="<?php echo esc_url(home_url('/')); ?>">Home</a></li>
-    <li><a href="<?php echo esc_url(home_url('/index.php/our-services')); ?>">Services</a></li>
+
+    <!-- Services — accordion -->
+    <li>
+      <button class="mobile-services-toggle" id="msv-toggle" aria-expanded="false" aria-controls="msv-dropdown">
+        Services <span class="msv-arrow">▾</span>
+      </button>
+      <ul class="mobile-services-dropdown" id="msv-dropdown" role="list">
+
+        <!-- View All at top -->
+        <li class="msv-view-all">
+          <a href="<?php echo esc_url(home_url('/index.php/our-services')); ?>">
+            View All Services →
+          </a>
+        </li>
+
+        <!-- Same order as desktop mega menu -->
+        <li>
+          <a href="<?php echo esc_url(home_url('/index.php/our-services/artificial-intelligence-and-automation')); ?>">
+            AI &amp; Automation
+          </a>
+        </li>
+        <li>
+          <a href="<?php echo esc_url(home_url('/index.php/our-services/business-analytics')); ?>">
+            Business Analytics
+          </a>
+        </li>
+        <li>
+          <a href="<?php echo esc_url(home_url('/index.php/cloud-infrastructure')); ?>">
+            Cloud Infrastructure
+          </a>
+        </li>
+        <li>
+          <a href="<?php echo esc_url(home_url('/index.php/our-services/consulting-operations')); ?>">
+            Consulting &amp; Ops
+          </a>
+        </li>
+        <li>
+          <a href="<?php echo esc_url(home_url('/index.php/our-services/cybersecurity')); ?>">
+            Cybersecurity
+          </a>
+        </li>
+        <li>
+          <a href="<?php echo esc_url(home_url('/index.php/our-services/data-analytics')); ?>">
+            Data Analytics
+          </a>
+        </li>
+        <li>
+          <a href="<?php echo esc_url(home_url('/index.php/our-services/enterprise-solutions')); ?>">
+            Enterprise Solutions
+          </a>
+        </li>
+        <li>
+          <a href="<?php echo esc_url(home_url('/index.php/our-services/industrial-autonomy-and-engineering')); ?>">
+            Industrial Autonomy
+          </a>
+        </li>
+        <li>
+          <a href="<?php echo esc_url(home_url('/index.php/our-services/network-solutions')); ?>">
+            Network Solutions &amp; Services
+          </a>
+        </li>
+
+      </ul>
+    </li>
+
+    <!-- Rest of nav — desktop order: Softwares, Industries, About Us, Contact -->
+    <li><a href="<?php echo esc_url(home_url('/index.php/softwares')); ?>">Softwares</a></li>
+    <li><a href="<?php echo esc_url(home_url('/index.php/industries')); ?>">Industries</a></li>
     <li><a href="<?php echo esc_url(home_url('/index.php/about')); ?>">About Us</a></li>
-    <li><a href="<?php echo esc_url(home_url('/#industries')); ?>">Industries</a></li>
-    <li><a href="<?php echo esc_url(home_url('/#testimonials')); ?>">Softwares</a></li>
     <li><a href="<?php echo esc_url(home_url('/index.php/contact')); ?>">Contact</a></li>
+
   </ul>
   <a href="<?php echo esc_url(get_theme_mod('hero_cta_1_url','#contact')); ?>" class="btn btn-primary">
     <?php echo nexaflow_hero('hero_cta_1_text', 'Get Started'); ?> →
@@ -490,8 +608,8 @@ li.has-mega::after {
           </li>
 
           <!-- Standard links -->
-          <li><a href="<?php echo esc_url(home_url('/#testimonials')); ?>">Softwares</a></li>
-          <li><a href="<?php echo esc_url(home_url('/#industries')); ?>">Industries</a></li>
+          <li><a href="<?php echo esc_url(home_url('/index.php/softwares')); ?>">Softwares</a></li>
+          <li><a href="<?php echo esc_url(home_url('/index.php/industries')); ?>">Industries</a></li>
           <li><a href="<?php echo esc_url(home_url('/index.php/about')); ?>">About Us</a></li>
           <li><a href="<?php echo esc_url(home_url('/index.php/contact')); ?>">Contact</a></li>
 
@@ -534,6 +652,17 @@ li.has-mega::after {
   const mobileClose = document.getElementById('mobile-close');
   const overlay    = document.getElementById('overlay');
 
+  // Services accordion in mobile menu
+  const msvToggle = document.getElementById('msv-toggle');
+  const msvDropdown = document.getElementById('msv-dropdown');
+  if (msvToggle && msvDropdown) {
+    msvToggle.addEventListener('click', () => {
+      const isOpen = msvDropdown.classList.toggle('open');
+      msvToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+  }
+
+  // Close accordion when menu closes
   function openMenu() {
     mobileMenu.classList.add('open');
     overlay.classList.add('active');
@@ -545,6 +674,9 @@ li.has-mega::after {
     overlay.classList.remove('active');
     hamburger.setAttribute('aria-expanded', 'false');
     document.body.style.overflow = '';
+    // Reset services accordion
+    if (msvDropdown) msvDropdown.classList.remove('open');
+    if (msvToggle) msvToggle.setAttribute('aria-expanded', 'false');
   }
 
   hamburger.addEventListener('click', openMenu);

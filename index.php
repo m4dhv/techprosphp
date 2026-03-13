@@ -26,7 +26,7 @@
             <?php echo nexaflow_hero('hero_cta_2_text', 'Explore Services'); ?>
           </a>
         </div>
-        <div class="hero-stats">
+        <div class="hero-stats" data-aos="fade-up">
           <?php
           $stats = [
             ['stat_clients_num',   '500+', 'stat_clients_lbl',   'Clients Worldwide'],
@@ -109,11 +109,11 @@
     </div>
   </div>
 </section>
-<!-- CLIENTS -->
+<!-- TECHNOLOGIES WE USE -->
 <section id="clients">
   <div class="container">
-    <h2 class="clients-label"><?php echo esc_html(get_theme_mod('clients_label', 'Technology Stack')); ?></h2>
-    <div class="logos-track">
+    <h2 data-aos="fade-up" class="clients-label"><?php echo esc_html(get_theme_mod('clients_label', 'Technology Stack')); ?></h2>
+    <div data-aos="fade-up" class="logos-track">
       <?php
       $raw     = get_theme_mod('clients_list', 'Python, PHP, GoLang, AWS, Microsoft Azure, Swift, SQL, and many more...');
       $clients = array_filter(array_map('trim', explode(',', $raw)));
@@ -202,7 +202,7 @@
     </div>
     <div class="industries-grid">
       <?php
-      $raw_json  = get_theme_mod('industries_json', '');
+      $raw_json   = get_theme_mod('industries_json', '');
       $industries = $raw_json ? json_decode($raw_json, true) : null;
       if (!is_array($industries)) {
         $industries = [
@@ -210,25 +210,42 @@
           ['🏥','Healthcare','Patient services, billing & compliance'],
           ['🛒','Retail & E-Commerce','CX, fulfillment & supply chain'],
           ['✈️','Travel & Hospitality','Booking, loyalty & support'],
-          ['📡','Telecom & Media','Subscriber services & network ops'],
-          ['🏭','Manufacturing','Supply chain & procurement'],
-          ['🏛️','Government','Citizen services & back-office'],
-          ['🎓','Education','Admissions, LMS & student support'],
         ];
         $industries = array_map(fn($r) => ['icon'=>$r[0],'title'=>$r[1],'description'=>$r[2]], $industries);
       }
+      $industries_url = home_url('/index.php/industries');
       foreach ($industries as $i => $ind) :
       ?>
-      <div class="industry-card reveal" style="transition-delay:<?php echo $i*0.08; ?>s">
+      <a href="<?php echo esc_url($industries_url); ?>" class="industry-card reveal" style="transition-delay:<?php echo $i*0.1; ?>s">
         <div class="industry-icon"><?php echo esc_html($ind['icon']); ?></div>
         <h4><?php echo esc_html($ind['title']); ?></h4>
         <p><?php echo esc_html($ind['description']); ?></p>
-      </div>
+      </a>
       <?php endforeach; ?>
+    </div>
+    <div class="industries-teaser-cta reveal">
+      <a class="btn btn-primary" href="<?php echo esc_url(home_url('/index.php/industries')); ?>" class="btn btn-secondary">
+        Explore All Industries →
+      </a>
     </div>
   </div>
 </section>
-
+ 
+<style>
+a.industry-card {
+  display: block;
+  text-decoration: none;
+  cursor: pointer;
+}
+a.industry-card h4 { color: #ffffff; }
+a.industry-card p  { color: #848D8C; }
+ 
+.industries-teaser-cta {
+  text-align: center;
+  margin-top: 48px;
+}
+</style>
+ 
 <!-- ABOUT -->
 <section id="about" class="section-pad">
   <div class="container">
@@ -376,44 +393,7 @@
       <?php if (function_exists('wpcf7_contact_form')) : ?>
         <?php echo do_shortcode('[contact-form-7 id="1" title="Contact form 1"]'); ?>
       <?php else : ?>
-      <form id="nexaflow-contact" style="display:flex;flex-direction:column;gap:20px;">
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
-          <div>
-            <label style="display:block;font-size:0.875rem;font-weight:600;color:var(--color-primary);margin-bottom:8px;">First Name *</label>
-            <input type="text" name="first_name" required  style="width:100%;padding:14px 16px;border:1.5px solid var(--color-gray-light);border-radius:8px;font-family:var(--font-body);font-size:1rem;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='var(--color-accent)'" onblur="this.style.borderColor='var(--color-gray-light)'">
-          </div>
-          <div>
-            <label style="display:block;font-size:0.875rem;font-weight:600;color:var(--color-primary);margin-bottom:8px;">Last Name *</label>
-            <input type="text" name="last_name" required  style="width:100%;padding:14px 16px;border:1.5px solid var(--color-gray-light);border-radius:8px;font-family:var(--font-body);font-size:1rem;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='var(--color-accent)'" onblur="this.style.borderColor='var(--color-gray-light)'">
-          </div>
-        </div>
-        <div>
-          <label style="display:block;font-size:0.875rem;font-weight:600;color:var(--color-primary);margin-bottom:8px;">Work Email *</label>
-          <input type="email" name="email" required  style="width:100%;padding:14px 16px;border:1.5px solid var(--color-gray-light);border-radius:8px;font-family:var(--font-body);font-size:1rem;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='var(--color-accent)'" onblur="this.style.borderColor='var(--color-gray-light)'">
-        </div>
-        <div>
-          <label style="display:block;font-size:0.875rem;font-weight:600;color:var(--color-primary);margin-bottom:8px;">Company *</label>
-          <input type="text" name="company" required  style="width:100%;padding:14px 16px;border:1.5px solid var(--color-gray-light);border-radius:8px;font-family:var(--font-body);font-size:1rem;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='var(--color-accent)'" onblur="this.style.borderColor='var(--color-gray-light)'">
-        </div>
-        <div>
-          <label style="display:block;font-size:0.875rem;font-weight:600;color:var(--color-primary);margin-bottom:8px;">Service Interest</label>
-          <select name="service" style="width:100%;padding:14px 16px;border:1.5px solid var(--color-gray-light);border-radius:8px;font-family:var(--font-body);font-size:1rem;outline:none;background:white;cursor:pointer;">
-            <option>Select a service</option>
-            <?php
-            $svc_posts = get_posts(['post_type'=>'service','posts_per_page'=>-1,'orderby'=>'menu_order']);
-            if ($svc_posts) foreach ($svc_posts as $s) echo '<option>'.esc_html($s->post_title).'</option>';
-            else foreach (['Customer Experience','Finance & Accounting','AI & Automation','Data Analytics','HR Outsourcing','IT Services'] as $s) echo "<option>{$s}</option>";
-            ?>
-          </select>
-        </div>
-        <div>
-          <label style="display:block;font-size:0.875rem;font-weight:600;color:var(--color-primary);margin-bottom:8px;">Message</label>
-          <textarea name="message" rows="4" placeholder="Tell us about your business challenges..." style="width:100%;padding:14px 16px;border:1.5px solid var(--color-gray-light);border-radius:8px;font-family:var(--font-body);font-size:1rem;outline:none;resize:vertical;transition:border-color 0.2s;" onfocus="this.style.borderColor='var(--color-accent)'" onblur="this.style.borderColor='var(--color-gray-light)'"></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;font-size:1rem;padding:16px;">
-          <?php echo nexaflow_hero('contact_btn_text', 'Send Message'); ?> →
-        </button>
-      </form>
+      <?php echo do_shortcode('[wpforms id="225"]'); ?>
       <?php endif; ?>
     </div>
   </div>

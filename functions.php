@@ -333,3 +333,23 @@ function tp_default_testimonials() {
     return [['id'=>0,'rating'=>'5','quote'=>'NexaFlow transformed our customer service operations completely. Response time dropped by 60% and CSAT jumped from 74% to 94% within 6 months.','author_name'=>'Sarah Mitchell','author_role'=>'Chief Operations Officer','author_company'=>'FinCorp Global','avatar'=>null],['id'=>0,'rating'=>'5','quote'=>'Their AI automation solution eliminated 70% of our manual data processing tasks. The ROI was evident in the first quarter — a 3.2x return on investment.','author_name'=>'David Chen','author_role'=>'VP of Technology','author_company'=>'RetailMax Inc','avatar'=>null],['id'=>0,'rating'=>'5','quote'=>'Working with NexaFlow felt like having an extension of our own team. They understood our compliance needs deeply and delivered flawlessly.','author_name'=>'Dr. Priya Sharma','author_role'=>'Director of Operations','author_company'=>'MedCare Systems','avatar'=>null]];
 }
 }
+
+function techpros_add_aos() {
+
+    wp_enqueue_style(
+        'aos-css',
+        'https://unpkg.com/aos@2.3.4/dist/aos.css',
+        [],
+        '2.3.4'
+    );
+
+    wp_enqueue_script(
+        'aos-js',
+        'https://unpkg.com/aos@2.3.4/dist/aos.js',
+        [],
+        '2.3.4',
+        true
+    );
+
+}
+add_action('wp_enqueue_scripts', 'techpros_add_aos');
